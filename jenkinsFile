@@ -5,9 +5,10 @@ pipeline{
     }
 
     stages(
-        stage('Deploy To Remote')
+        stage('Deploy To Remote'){
         steps{
             sh 'scp ${WORKSPACE}/* root@$(staging_server):/var/www/html/'
+        }
         }
     )
 }

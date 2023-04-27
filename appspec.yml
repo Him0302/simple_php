@@ -1,0 +1,16 @@
+version: 0.0
+os: linux
+files:
+  - source: /
+    destination: /var/www/html/
+hooks:
+  AfterInstall:
+    - location: install_dependencies.sh
+      timeout: 300
+      runas: root
+  ApplicationStart:
+    - location: start_apache.sh
+      timeout: 300
+      runas: root     
+ 
+    

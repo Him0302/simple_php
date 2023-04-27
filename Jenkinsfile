@@ -7,7 +7,15 @@ pipeline{
     stages{
         stage('Deploy To Remote'){
         steps{
-            sh 'scp ${WORKSPACE}/* root@${staging_server}:/var/www/html/'
+            
+            sh '''
+            for fileName in 'find ${WORKSAPCE} -type f -mnin -10 | grep -v ".git"|grep -v "Jenkinsfile"
+            do 
+            fil=${ echo ${fileName} | sed 's/'"${JOB_NAME}"'/ /'| awk {'print $2'} }
+            scp ${WORKSPACE}/${fil} root@${staging_server}:/var/www/html/${fil}
+            
+            '''
+            
         }
         }
     }

@@ -13,6 +13,7 @@ pipeline{
             do 
             fil=${ echo ${fileName} | sed 's/'"${JOB_NAME}"'/ /'| awk {'print $2'} }
             scp ${WORKSPACE}/${fil} root@${staging_server}:/var/www/html/${fil}
+            done
             
             '''
             
